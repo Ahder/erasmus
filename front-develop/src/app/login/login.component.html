@@ -1,0 +1,47 @@
+<mat-grid-list cols="1" rowHeight="2:1">
+
+  <mat-grid-tile>
+    <mat-card *ngIf="loginForm">
+
+      <mat-tab-group dynamicHeight>
+        <mat-tab label="Authentification" *ngIf="!mailIsForgotten">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <mat-card-content>
+              <mat-form-field>
+                <input type="text" matInput formControlName="email" placeholder="Identifiant">
+                <mat-error *ngIf="loginForm.controls.email.errors">Veuillez remplir ce champ</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input type="password" matInput formControlName="password" placeholder="Mot de passe">
+                <mat-error *ngIf="loginForm.controls.password.errors">Veuillez remplir ce champ</mat-error>
+              </mat-form-field>
+              <div (click)="mailIsForgotten = true">Mot de passe oublié</div>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button mat-raised-button color="primary" [disabled]="loginForm.invalid">Connexion</button>
+            </mat-card-actions>
+          </form>
+        </mat-tab>
+        <mat-tab label="Inscription" *ngIf="!mailIsForgotten">
+          <app-user></app-user>
+        </mat-tab>
+        <mat-tab label="Mot de passe oublié" *ngIf="mailIsForgotten">
+          <form [formGroup]="forgotMail" (ngSubmit)="submitMail()">
+            <mat-card-content>
+              <mat-form-field>
+                <input type="text" matInput placeholder="Entrez votre email" formControlName="mail">
+                <mat-error *ngIf="forgotMail.controls.mail.errors">Veuillez remplir ce champ</mat-error>
+              </mat-form-field>
+             </mat-card-content>
+            <mat-card-actions>
+              <button mat-button mat-raised-button color="primary" [disabled]="forgotMail.invalid">Réinitialiser mon mot de passe</button>
+              <button mat-button mat-raised-button color="primary" (click)="mailIsForgotten = false">Retour</button>
+            </mat-card-actions>
+          </form>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+
+

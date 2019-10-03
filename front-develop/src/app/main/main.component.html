@@ -1,0 +1,45 @@
+<mat-grid-list [cols]="(loggedUser.role === 'ADMIN') ? 4 : 3">
+  <mat-grid-tile>
+    <mat-card routerLink="/formulaire/cu">
+      <mat-card-content>
+          <mat-icon>note_add</mat-icon>
+        <h1>Nouveau formulaire</h1>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card routerLink="/formulaire/list">
+      <mat-card-content>
+        <mat-icon>insert_drive_file</mat-icon>
+        <h1 *ngIf="loggedUser.role === 'STUDENT'">Mes formulaires</h1>
+        <h1 *ngIf="loggedUser.role !== 'STUDENT'">Liste des formulaires</h1>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile *ngIf="loggedUser.role === 'ADMIN'">
+    <mat-card routerLink="/utilisateur/cu">
+      <mat-card-content>
+        <mat-icon>person_add</mat-icon>
+        <h1>Nouvel utilisateur</h1>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile *ngIf="loggedUser.role !== 'STUDENT'">
+    <mat-card routerLink="/utilisateur/list">
+      <mat-card-content>
+        <mat-icon>group</mat-icon>
+        <h1 *ngIf="loggedUser.role === 'RPI'">Liste de mes étudiants</h1>
+        <h1 *ngIf="loggedUser.role !== 'RPI'">Liste des utilisateurs</h1>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile *ngIf="loggedUser.role !== 'ADMIN'">
+    <mat-card routerLink="/utilisateur">
+      <mat-card-content>
+        <mat-icon>account_circle</mat-icon>
+        <h1>Mon compte</h1>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+

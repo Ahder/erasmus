@@ -1,0 +1,92 @@
+<mat-card *ngIf="form">
+  <form [formGroup]="formForm" (ngSubmit)="onSubmit()">
+    <mat-card-header>
+      <mat-card-title>Formulaire</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <!-- Entête -->
+      <p>Entête</p>
+      <mat-form-field>
+        <input matInput type="number" placeholder="Date de début" formControlName="schoolYearStart">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" placeholder="Date de fin" formControlName="schoolYearEnd">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Semestre" formControlName="semester">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Domaine d'études" formControlName="studyDomain">
+      </mat-form-field>
+      <!-- Etudiant --><br>
+      <mat-divider></mat-divider>
+      <p>Etudiant</p>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Nom de l'étudiant" formControlName="studentLastname">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Prénom de l'étudiant" formControlName="studentFirstname">
+      </mat-form-field>
+      <!-- Etablissement d'acceuil --><br>
+      <mat-divider></mat-divider>
+      <p>Etablissement d'acceuil</p>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Etablissement d'accueil" formControlName="hostEstablishment">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Pays" formControlName="country">
+      </mat-form-field>
+      <!-- Cours --><br>
+      <mat-divider></mat-divider>
+      <p>Cours <mat-icon *ngIf="!show" class="example-icon" (click)="addCourse()">add_circle</mat-icon></p>
+      <div formArrayName="courses" *ngFor="let course of courses.controls; let i=index;" class="course-form">
+        <div [formGroupName]="i">
+          <input matInput type="text" placeholder="Nom du cours {{i+1}}" formControlName="titleCourse">
+          <input matInput type="number" placeholder="Nombre de crédits locaux" formControlName="nbrCredits">
+          <input matInput type="number" placeholder="Nombre d'ects" formControlName="nbrEcts">
+        </div>
+        <mat-icon *ngIf="!show" class="example-icon" (click)="removeCourse(i)">remove_circle</mat-icon>
+      </div>
+      <mat-divider></mat-divider>
+      <!-- SIGNATURES -->
+      <!-- Signature de l'étudiant --><br>
+      <div style="display: inline-block">
+      <p>Signature de l'étudiant</p><br>
+      <mat-form-field>
+        <input matInput type="date" placeholder="Date de signature de l'étudiant"
+               formControlName="signatureDateStudent" >
+      </mat-form-field><br>
+        <img src="{{signatureStudentUrl}}" alt="">
+      <app-canvas *ngIf="!show" (signature)="getStudentSignature($event)"></app-canvas><br>
+      </div>
+
+      <!-- Signature du RPI d'origine -->
+      <div style="display: inline-block; margin-left: 200px">
+      <p>Signature du RPI d'origine</p><br>
+      <mat-form-field>
+        <input matInput type="date" placeholder="Date de signature du RPI" formControlName="signatureDateRpiHome">
+      </mat-form-field><br>
+        <img src="{{signatureHomeUrl}}" alt="">
+        <app-canvas *ngIf="!show" (signature)="getOriginSignature($event)"></app-canvas><br>
+      </div>
+
+      <!-- Signature du RPI d'acceuil -->
+      <div style="display: inline-block; margin-left: 200px">
+      <p>Signature du RPI d'acceuil</p><br>
+      <mat-form-field>
+        <input matInput type="date" placeholder="Date de signature du RPI" formControlName="signatureDateRpiHost">
+      </mat-form-field><br>
+        <img src="{{signatureHostUrl}}" alt="">
+        <app-canvas *ngIf="!show" (signature)="getHostSignature($event)"></app-canvas><br>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions *ngIf="!show">
+      <button mat-button mat-raised-button color="primary">Enregistrer</button>
+    </mat-card-actions>
+  </form>
+  <mat-card-actions *ngIf="show">
+    <button mat-button mat-raised-button routerLink="/formulaire/cu" color="accent">Modifier</button>
+    <button mat-button mat-raised-button (click)="deleteForm()" color="warn">Supprimer</button>
+  </mat-card-actions>
+</mat-card>

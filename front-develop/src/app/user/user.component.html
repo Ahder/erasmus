@@ -1,0 +1,66 @@
+<mat-card>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <mat-card-header *ngIf="!register">
+        <mat-card-title *ngIf="!show && register">Ajouter un utilisateur</mat-card-title>
+        <mat-card-title *ngIf="show">Profil</mat-card-title>
+        <mat-card-title *ngIf="!show && !register">Modifier mon profil</mat-card-title>
+      </mat-card-header>
+      <mat-divider *ngIf="!register"></mat-divider>
+      <mat-card-content>
+        <div><img src="" alt=""></div>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Nom" formControlName="lastname">
+          <mat-error *ngIf="userForm.controls.lastname.errors">Veuillez remplir ce champ</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Prénom" formControlName="firstname">
+          <mat-error *ngIf="userForm.controls.firstname.errors">Veuillez remplir ce champ</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="date" placeholder="Date de naissance" formControlName="birthdate">
+          <mat-error *ngIf="userForm.controls.birthdate.errors">Veuillez remplir ce champ</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Email" formControlName="email">
+          <mat-error *ngIf="userForm.controls.email.hasError('required')">Veuillez remplir ce champ</mat-error>
+          <mat-error *ngIf="userForm.get('email').errors && userForm.get('email').errors.email">Veuillez entrer une adresse email valide</mat-error>
+        </mat-form-field>
+        <mat-form-field formGroupName="spinneret" >
+          <input matInput type="text" placeholder="Level" formControlName="level">
+          <mat-error *ngIf="userForm.controls.spinneret.hasError('required')">Veuillez remplir ce champ</mat-error>
+        </mat-form-field>
+        <mat-form-field formGroupName="spinneret" >
+          <input matInput type="text" placeholder="Label" formControlName="label">
+          <mat-error *ngIf="userForm.controls.spinneret.hasError('required')">Veuillez remplir ce champ</mat-error>
+        </mat-form-field>
+          <mat-form-field>
+            <input matInput type="password" placeholder="Mot de passe" formControlName="password">
+            <mat-error *ngIf="userForm.controls.password.hasError('required')">Veuillez remplir ce champ</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="password" placeholder="Mot de passe" formControlName="confirmPassword">
+            <mat-error *ngIf="userForm.controls.confirmPassword.hasError('required')">Veuillez remplir ce champ</mat-error>
+            <mat-error *ngIf="userForm.get('confirmPassword').errors && userForm.get('confirmPassword').errors.ConfirmPassword">
+              Le mot de passe doit être identique</mat-error>
+          </mat-form-field>
+        <mat-form-field *ngIf="!register">
+          <mat-label>Role</mat-label>
+          <mat-select formControlName="role" name="role">
+            <mat-option value="STUDENT">Student</mat-option>
+            <mat-option value="RPI">RPI</mat-option>
+            <mat-option value="ADMIN">Administrator</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button *ngIf="!show" mat-button mat-raised-button color="primary" [disabled]="userForm.invalid">Enregistrer</button>
+      </mat-card-actions>
+    <mat-card-actions *ngIf="show">
+      <button mat-button mat-raised-button routerLink="/utilisateur/cu" color="accent" type="button">Modifier</button>
+      <button mat-button mat-raised-button (click)="deleteUser()" color="warn" type="button">Supprimer</button>
+    </mat-card-actions>
+    </form>
+  </mat-card>
+
+
+

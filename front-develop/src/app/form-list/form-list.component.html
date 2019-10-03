@@ -1,0 +1,49 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+  <ng-container (click)="showForm(element)">
+    <!-- Position Column -->
+    <ng-container matColumnDef="Nom">
+      <th mat-header-cell *matHeaderCellDef> Nom </th>
+      <td mat-cell *matCellDef="let element"> {{element.student.lastname}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Prénom">
+      <th mat-header-cell *matHeaderCellDef> Prénom </th>
+      <td mat-cell *matCellDef="let element"> {{element.student.firstname}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Années d'études">
+      <th mat-header-cell *matHeaderCellDef> Années d'études </th>
+      <td mat-cell *matCellDef="let element"> {{element.schoolYearStart+'-'+element.schoolYearEnd}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Semestre">
+      <th mat-header-cell *matHeaderCellDef> Semestre </th>
+      <td mat-cell *matCellDef="let element"> {{'S'+element.semester}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Classe">
+      <th mat-header-cell *matHeaderCellDef> Classe </th>
+      <td mat-cell *matCellDef="let element"> {{element.student.spinneret.label+' '+element.student.spinneret.level}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Etablissement d'accueil">
+      <th mat-header-cell *matHeaderCellDef> Etablissement d'accueil </th>
+      <td mat-cell *matCellDef="let element"> {{element.hostEstablishment}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Pays">
+      <th mat-header-cell *matHeaderCellDef> Pays </th>
+      <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+    </ng-container>
+
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="showForm(row)"></tr>
+</table>

@@ -1,0 +1,13 @@
+<mat-toolbar color="primary" *ngIf="router.url !== '/login' && router.url.split('/')[1] !== 'resetPassword'">
+  <mat-toolbar-row>
+    <span routerLink="/">Erasmus</span>
+    <span class="example-spacer"></span>
+    <mat-icon class="example-icon" (click)='formService.resetForm()' routerLink="/formulaire/cu">note_add</mat-icon>
+    <mat-icon class="example-icon" routerLink="/formulaire/list">insert_drive_file</mat-icon>
+    <mat-icon *ngIf="loggedUser && loggedUser.role == 'ADMIN'" class="example-icon" (click)="userService.resetUser()" routerLink="/utilisateur/cu">person_add</mat-icon>
+    <mat-icon class="example-icon" (click)="userService.setUser(loggedUser)" routerLink="/utilisateur">account_circle</mat-icon>
+    <mat-icon *ngIf="loggedUser && loggedUser.role == 'ADMIN'" class="example-icon" routerLink="/utilisateur/list">group</mat-icon>
+    <mat-icon class="example-icon" (click)="loginService.deconnection()">exit_to_app</mat-icon>
+  </mat-toolbar-row>
+</mat-toolbar>
+<router-outlet></router-outlet>

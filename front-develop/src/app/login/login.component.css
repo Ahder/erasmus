@@ -1,0 +1,59 @@
+mat-card {
+  width: 450px;
+  background: #fffffff2;
+}
+
+mat-form-field{
+  width: 100%;
+  max-width: 350px;
+  display: block;
+  margin: auto;
+}
+
+form {
+  overflow: hidden;
+  padding-top: 25px;
+}
+
+button {
+  float: right;
+  margin-right: 25px!important;
+}
+
+::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label {
+  width: 50%;
+}
+
+::ng-deep .mat-ink-bar {
+  width: 50%;
+}
+
+:host {
+  background: url("/assets/img/login-bg.jpg") no-repeat;
+  -webkit-background-size: cover;
+  background-size: cover;
+  display: block;
+  background-position: center;
+  height: 100%;
+}
+
+:host ::ng-deep app-user mat-card {
+  width: 400px!important;
+  background: rgba(255,255,255,0);
+  box-shadow: none!important;
+  margin-top: 0;
+}
+
+:host ::ng-deep app-user mat-form-field {
+  width: 180px;
+}
+
+:host {
+  overflow-y: hidden;
+}
+
+mat-card-content div {
+  cursor: pointer;
+  padding-top: 20px;
+  margin-left: 50px;
+}

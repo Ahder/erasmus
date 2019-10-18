@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://learning-agreement-api.herokuapp.com'
+  apiUrl: 'http://localhost:9090'
+   /* 'https://learning-agreement-api.herokuapp.com'*/
 };
 
 /*
